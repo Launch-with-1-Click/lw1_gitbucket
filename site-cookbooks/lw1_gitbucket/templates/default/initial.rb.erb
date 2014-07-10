@@ -1,0 +1,48 @@
+## update default password
+template '/opt/gitbucket/jetty/webapps/ROOT/WEB-INF/classes/update/1_0.sql' do
+  action :create
+  local true
+  source '/opt/lw1/templates/1_0.sql.erb'
+  owner 'jetty'
+  group 'jetty'
+  backup false
+end
+
+bash 'create_cert_for_ssl' do
+  code <<-EOH
+  openssl genrsa > /etc/nginx/dummy_key.pem
+  openssl req -subj "/C=JP/ST=Kobe-shi/L=Chuo-ku/O=OpsRock LLC/OU=amiage.com/CN=#{node[:ec2][:public_hostname]}" \
+    -new -x509 -nodes -sha1 -days 3650 -key /etc/nginx/dummy_key.pem > /etc/nginx/dummy_cert.pem
+  EOH
+  creates '/etc/nginx/dummy_cert.pem'
+end
+
+file '/etc/nginx/dummy_key.pem' do
+  mode '0600'
+end
+
+file '/etc/nginx/dummy_cert.pem' do
+  mode '0600'
+end
+
+service 'nginx' do
+  action [:start, :enable]
+end
+
+service 'gitbucket' do
+  action [:start, :enable]
+end
+
+file '/etc/cron.d/first_boot' do
+  action :delete
+end
+
+directory '/opt/lw1' do
+  action :delete
+  recursive true
+end
+
+directory '/var/chef/cache' do
+  action :delete
+  recursive true
+end

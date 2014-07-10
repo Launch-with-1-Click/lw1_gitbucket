@@ -1,0 +1,10 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    chef-sugar (2.0.0)
+    simplelog_handler (1.0.0)
+
+DEPENDENCIES
+  chef-sugar (>= 0)
+  simplelog_handler (>= 0)
+

@@ -1,0 +1,14 @@
+JETTY_HOME=/opt/gitbucket/jetty
+JETTY_RUN=/opt/gitbucket/jetty
+JETTY_USER=jetty
+JETTY_SHELL=/bin/sh
+
+GITBUCKET_HOME=/opt/gitbucket/data
+
+## JAVA
+_memtotal=`cat /proc/meminfo | grep MemTotal | sed 's/\s\{1,\}/ /g' | cut -d ' ' -f2`
+_java_heap=$(($_memtotal /1024 /2))
+_java_new=$(($_java_heap  /4))
+_java_perm=$(($_java_heap /4))
+JAVA_OPTIONS="-Xms${_java_heap}m -Xmx${_java_heap}m -XX:NewSize=${_java_new}m -XX:MaxNewSize=${_java_new}m -XX:PermSize=${_java_perm}m -XX:MaxPermSize=${_java_perm}m"
+
