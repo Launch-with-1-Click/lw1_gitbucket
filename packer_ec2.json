@@ -39,9 +39,9 @@
         "site-cookbooks"
       ],
       "run_list" : [
-        "lw1_virtuoso::settings",
-        "lw1_virtuoso::nginx_proxy",
-        "lw1_virtuoso::set_initiaize"
+        "lw1_gitbucket::settings",
+        "lw1_gitbucket::nginx_proxy",
+        "lw1_gitbucket::set_initiaize"
       ]
     },
     {
