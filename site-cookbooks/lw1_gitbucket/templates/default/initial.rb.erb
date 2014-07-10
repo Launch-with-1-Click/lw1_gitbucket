@@ -42,6 +42,11 @@ directory '/opt/lw1' do
   recursive true
 end
 
+directory '/opt/src' do
+  action :delete
+  recursive true
+end
+
 directory '/var/chef/cache' do
   action :delete
   recursive true
