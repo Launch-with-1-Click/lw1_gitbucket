@@ -2,6 +2,7 @@
 env.sh
 env2.sh
 .vagrant/
-tmp/
+/tmp/
 .rvmrc
 cookbooks/
+/ec2_amazon-ebs.pem
