@@ -8,6 +8,11 @@ cookbook_file '/opt/lw1/templates/1_0.sql.erb' do
   source '1_0.sql.erb'
 end
 
+cookbook_file '/opt/lw1/templates/hosts.erb' do
+  action :create
+  source 'hosts.erb'
+end
+
 template '/opt/lw1/initial.rb' do
   action :create
   source 'initial.rb.erb'
@@ -17,3 +22,4 @@ cookbook_file '/etc/cron.d/first_boot' do
   action :create
   source 'first_boot'
 end
+

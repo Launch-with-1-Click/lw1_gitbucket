@@ -8,10 +8,24 @@ template '/opt/gitbucket/jetty/webapps/ROOT/WEB-INF/classes/update/1_0.sql' do
   backup false
 end
 
+## VPC
+if node[:ec2][:public_hostname].empty?
+  template '/etc/hosts' do
+    action :create
+    local true
+    source '/opt/lw1/templates/hosts.erb'
+    owner 'root'
+    group 'root'
+    mode  '0644'
+    backup false
+  end
+end
+
+
 bash 'create_cert_for_ssl' do
   code <<-EOH
   openssl genrsa > /etc/nginx/dummy_key.pem
-  openssl req -subj "/C=JP/ST=Kobe-shi/L=Chuo-ku/O=OpsRock LLC/OU=amiage.com/CN=#{node[:ec2][:public_hostname]}" \
+  openssl req -subj "/C=JP/ST=Kobe-shi/L=Chuo-ku/O=OpsRock LLC/OU=amiage.com/CN=#{node[:ec2][:public_ipv4]}" \
     -new -x509 -nodes -sha1 -days 3650 -key /etc/nginx/dummy_key.pem > /etc/nginx/dummy_cert.pem
   EOH
   creates '/etc/nginx/dummy_cert.pem'
