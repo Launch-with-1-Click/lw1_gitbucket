@@ -3,7 +3,7 @@
 set -ex
 
 JETTY_VERSION='9.2.1.v20140609'
-GB_VERSION='2.1'
+GB_VERSION='2.2'
 DEFAULT_USER='ec2-user'
 DEFAULT_GROUP='ec2-user'
 JETTY_USER='jetty'
