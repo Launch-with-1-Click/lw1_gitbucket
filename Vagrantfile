@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     aws.tags = {
-      'Name' => 'GitBucket_2.1'
+      'Name' => 'GitBucket_2.3'
     }
 
     override.ssh.username = "ec2-user"
