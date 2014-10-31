@@ -9,11 +9,11 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "us-east-1",
-      "source_ami": "ami-08842d60",
+      "source_ami": "ami-b66ed3de",
       "instance_type": "c3.2xlarge",
       "ssh_username": "ec2-user",
       "ssh_timeout": "10m",
-      "ami_name": "GitBucket 2.4.1 on 2014.09 {{timestamp}}"
+      "ami_name": "GitBucket 2.4.1 on 2014.09.1 {{timestamp}}"
     }
   ],
 
