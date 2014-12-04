@@ -13,7 +13,7 @@
       "instance_type": "c3.2xlarge",
       "ssh_username": "ec2-user",
       "ssh_timeout": "10m",
-      "ami_name": "GitBucket 2.4.1 on 2014.09.1 {{timestamp}}"
+      "ami_name": "GitBucket 2.6 on 2014.09.3 {{timestamp}}"
     }
   ],
 
