@@ -14,7 +14,7 @@ sudo yum install git -y
 
 
 ## Install dependencies
-sudo yum install -y nginx java-1.7.0-openjdk-devel
+sudo yum install -y nginx java-1.8.0-openjdk-devel
 
 ## Prepare dirs
 sudo install -o ${DEFAULT_USER} -g ${DEFAULT_GROUP} -d /opt/src
