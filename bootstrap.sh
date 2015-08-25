@@ -15,6 +15,7 @@ sudo yum install git -y
 
 ## Install dependencies
 sudo yum install -y nginx java-1.8.0-openjdk-devel
+sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
 
 ## Prepare dirs
 sudo install -o ${DEFAULT_USER} -g ${DEFAULT_GROUP} -d /opt/src
@@ -27,6 +28,7 @@ wget ftp://ftp.jaist.ac.jp/pub/eclipse/jetty/stable-9/dist/jetty-distribution-${
 ## Extract jetty
 sudo tar xvzf /opt/src/jetty.tar.gz -C /opt/gitbucket/
 sudo mv /opt/gitbucket/jetty-distribution-${JETTY_VERSION} /opt/gitbucket/jetty
+sudo chown jetty.jetty -R /opt/gitbucket/jetty
 
 
 ## Copy initial script
