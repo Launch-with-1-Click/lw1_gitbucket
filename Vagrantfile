@@ -19,15 +19,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = 'c3.2xlarge'
     case ENV['AWS_REGION']
     when 'ap-northeast-1'
-      aws.ami = 'ami-cbf90ecb' # Amazon Linux AMI 2015.03.0 (HVM) SSD
+      aws.ami = 'ami-9a2fb89a' # Amazon Linux AMI 2015.09.0 (HVM) SSD
     when 'us-east-1'
-      aws.ami = 'ami-1ecae776' # Amazon Linux AMI 2015.03.0 (HVM) SSD
+      aws.ami = 'ami-e3106686' # Amazon Linux AMI 2015.09.0 (HVM) SSD
     else
       raise "Unsupported region #{ENV['AWS_REGION']}"
     end
 
     aws.tags = {
-      'Name' => 'GitBucket_3.5'
+      'Name' => 'GitBucket_3.7'
     }
 
     override.ssh.username = "ec2-user"

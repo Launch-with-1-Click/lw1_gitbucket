@@ -25,7 +25,7 @@ end
 bash 'create_cert_for_ssl' do
   code <<-EOH
   openssl genrsa > /etc/nginx/dummy_key.pem
-  openssl req -subj "/C=JP/ST=Kobe-shi/L=Chuo-ku/O=OpsRock LLC/OU=amiage.com/CN=#{node[:ec2][:public_ipv4]}" \
+  openssl req -subj "/C=JP/ST=Kobe-shi/L=Chuo-ku/O=OpsRock LLC/OU=amiage.com/CN=#{node[:ec2][:public_ipv4] ? node[:ec2][:public_ipv4] : node[:ipaddress]}" \
     -new -x509 -nodes -sha1 -days 3650 -key /etc/nginx/dummy_key.pem > /etc/nginx/dummy_cert.pem
   EOH
   creates '/etc/nginx/dummy_cert.pem'
@@ -61,7 +61,9 @@ directory '/opt/src' do
   recursive true
 end
 
-directory '/var/chef/cache' do
-  action :delete
-  recursive true
+%w{/var/chef/cache /var/chef/backup}.map do |dir|
+  directory dir do
+    action :delete
+    recursive true
+  end
 end
