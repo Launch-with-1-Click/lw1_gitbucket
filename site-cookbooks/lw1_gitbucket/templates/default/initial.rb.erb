@@ -24,7 +24,7 @@ end
 
 bash 'create_cert_for_ssl' do
   code <<-EOH
-  openssl genrsa > /etc/nginx/dummy_key.pem
+  openssl genrsa 2048 > /etc/nginx/dummy_key.pem
   openssl req -subj "/C=JP/ST=Kobe-shi/L=Chuo-ku/O=OpsRock LLC/OU=amiage.com/CN=#{node[:ec2][:public_ipv4] ? node[:ec2][:public_ipv4] : node[:ipaddress]}" \
     -new -x509 -nodes -sha1 -days 3650 -key /etc/nginx/dummy_key.pem > /etc/nginx/dummy_cert.pem
   EOH
