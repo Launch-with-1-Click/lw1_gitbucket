@@ -23,7 +23,7 @@ sudo install -o ${JETTY_USER} -g ${JETTY_GROUP} -d /opt/gitbucket
 
 
 ## Download  latest stable jetty to /opt
-wget ftp://ftp.jaist.ac.jp/pub/eclipse/jetty/stable-9/dist/jetty-distribution-${JETTY_VERSION}.tar.gz -O /opt/src/jetty.tar.gz
+sudo wget ftp://ftp.jaist.ac.jp/pub/eclipse/jetty/stable-9/dist/jetty-distribution-${JETTY_VERSION}.tar.gz -O /opt/src/jetty.tar.gz
 
 ## Extract jetty
 sudo tar xvzf /opt/src/jetty.tar.gz -C /opt/gitbucket/
