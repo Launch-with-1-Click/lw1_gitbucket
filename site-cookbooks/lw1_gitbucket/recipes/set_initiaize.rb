@@ -15,11 +15,6 @@ directory '/opt/lw1/tasks' do
   recursive true
 end
 
-# cookbook_file '/opt/lw1/templates/1_0.sql.erb' do
-#   action :create
-#   source '1_0.sql.erb'
-# end
-
 cookbook_file '/opt/lw1/templates/hosts.erb' do
   action :create
   source 'hosts.erb'
