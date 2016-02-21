@@ -2,8 +2,8 @@
 
 set -ex
 
-JETTY_VERSION='9.3.3.v20150827'
-GB_VERSION='3.7'
+JETTY_VERSION='9.3.7.v20160115'
+GB_VERSION='3.11'
 DEFAULT_USER='ec2-user'
 DEFAULT_GROUP='ec2-user'
 JETTY_USER='jetty'
@@ -36,10 +36,6 @@ sudo install -o root -g root -m 0755 /opt/gitbucket/jetty/bin/jetty.sh /etc/init
 
 # Extract gitbucket
 mkdir ROOT
-wget https://github.com/takezoe/gitbucket/releases/download/${GB_VERSION}/gitbucket.war -O ROOT/gitbucket.war
-cd ROOT
-sudo jar xvf gitbucket.war
-sudo rm -f gitbucket.war
-cd ..
-sudo mv ROOT /opt/gitbucket/jetty/webapps/
-sudo chown -R ${JETTY_USER}.${JETTY_GROUP} /opt/gitbucket/jetty/webapps/ROOT
+wget https://github.com/takezoe/gitbucket/releases/download/${GB_VERSION}/gitbucket.war -O root.war
+sudo mv root.war /opt/gitbucket/jetty/webapps/
+sudo chown -R ${JETTY_USER}.${JETTY_GROUP} /opt/gitbucket/jetty/webapps/

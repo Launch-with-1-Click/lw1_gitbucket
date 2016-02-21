@@ -16,18 +16,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.user_data = "#!/bin/bash\nsed -i -e 's/^Defaults.*requiretty/# Defaults requiretty/g' /etc/sudoers"
 
     aws.region = ENV['AWS_REGION']
-    aws.instance_type = 'c3.2xlarge'
+    aws.instance_type = 'c3.large'
     case ENV['AWS_REGION']
     when 'ap-northeast-1'
-      aws.ami = 'ami-9a2fb89a' # Amazon Linux AMI 2015.09.0 (HVM) SSD
+      aws.ami = 'ami-383c1956' # Amazon Linux AMI 2015.09.1 (HVM) SSD
     when 'us-east-1'
-      aws.ami = 'ami-e3106686' # Amazon Linux AMI 2015.09.0 (HVM) SSD
+      aws.ami = 'ami-60b6c60a' # Amazon Linux AMI 2015.09.1 (HVM) SSD
     else
       raise "Unsupported region #{ENV['AWS_REGION']}"
     end
 
     aws.tags = {
-      'Name' => 'GitBucket_3.7'
+      'Name' => "GitBucket #{ENV['PRODUCT_VERSION']} (Developed by #{ENV['USER']})"
     }
 
     override.ssh.username = "ec2-user"
@@ -40,6 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
     chef.add_recipe 'simplelog_handler::default'
+    chef.add_recipe 'lw1_gitbucket::nginx_mainline'
     chef.add_recipe 'lw1_gitbucket::user_group'
   end
 

@@ -1,3 +1,10 @@
+%w[/etc/pki/tls/certs/amimoto.default.crt /etc/pki/tls/private/amimoto.default.key].each do |pem|
+  file pem do
+    action :delete
+  end
+end
+
+
 directory '/opt/lw1/templates' do
   action :create
   recursive true
