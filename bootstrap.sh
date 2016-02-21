@@ -35,7 +35,7 @@ sudo chown jetty.jetty -R /opt/gitbucket/jetty
 sudo install -o root -g root -m 0755 /opt/gitbucket/jetty/bin/jetty.sh /etc/init.d/gitbucket
 
 # Extract gitbucket
-mkdir ROOT
+mkdir -p ROOT
 wget https://github.com/takezoe/gitbucket/releases/download/${GB_VERSION}/gitbucket.war -O root.war
 sudo mv root.war /opt/gitbucket/jetty/webapps/
 sudo chown -R ${JETTY_USER}.${JETTY_GROUP} /opt/gitbucket/jetty/webapps/

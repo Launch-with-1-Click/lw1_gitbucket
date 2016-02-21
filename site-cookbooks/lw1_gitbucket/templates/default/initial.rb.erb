@@ -1,13 +1,3 @@
-## update default password
-# template '/opt/gitbucket/jetty/webapps/ROOT/WEB-INF/classes/update/1_0.sql' do
-#   action :create
-#   local true
-#   source '/opt/lw1/templates/1_0.sql.erb'
-#   owner 'jetty'
-#   group 'jetty'
-#   backup false
-# end
-
 ## VPC
 if node[:ec2][:public_hostname].empty?
   template '/etc/hosts' do
@@ -21,6 +11,16 @@ if node[:ec2][:public_hostname].empty?
   end
 end
 
+template "/opt/lw1/www/install_amiage.php" do
+  local true
+  mode  '0644'
+  owner "apache"
+  group "apache"
+  source "/opt/lw1/tasks/install_amiage.php.erb"
+  variables ({
+    :instance_id => node[:ec2][:instance_id]
+  })
+end
 
 bash 'create_cert_for_ssl' do
   code <<-EOH
@@ -43,17 +43,20 @@ service 'nginx' do
   action [:start, :enable]
 end
 
+service 'postfix' do
+  action [:start, :enable]
+end
+
+service 'php-fpm' do
+  action [:start, :enable]
+end
+
 service 'gitbucket' do
   action [:start, :enable]
 end
 
 file '/etc/cron.d/first_boot' do
   action :delete
-end
-
-directory '/opt/lw1' do
-  action :delete
-  recursive true
 end
 
 directory '/opt/src' do

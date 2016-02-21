@@ -47,10 +47,17 @@ http {
         ssl_session_timeout  5m;
 
         ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers  HIGH:!aNULL:!MD5;
+        ssl_ciphers AESGCM:HIGH:!aNULL:!MD5;
         ssl_prefer_server_ciphers   on;
 
         location / {
+          ## InstanceID Checker >>>
+          # You can remove this lines after registration.
+          if ( -e /opt/lw1/www/install_amiage.php ) {
+             rewrite ^(.*)$ /install_amiage.php redirect;
+          }
+          ## << InstanceID Checker
+
           proxy_pass   http://127.0.0.1:8080;
           proxy_set_header        Host $host;
           proxy_set_header        X-Forwarded-Proto $scheme;
@@ -63,6 +70,13 @@ http {
           proxy_redirect http:// $scheme://;
           client_max_body_size    500m;
           client_body_buffer_size 128k;
+        }
+
+        location = /install_amiage.php {
+          root         /opt/lw1/www;
+          include fastcgi_params;
+          fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+          fastcgi_pass   php-fpm;
         }
 
         # redirect server error pages to the static page /40x.html

@@ -12,7 +12,7 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "us-east-1",
-      "source_ami": "ami-60b6c60a",
+      "source_ami": "ami-8fcee4e5",
       "instance_type": "c3.large",
       "ssh_username": "ec2-user",
       "ssh_timeout": "10m",
@@ -34,6 +34,7 @@
         "site-cookbooks"
       ],
       "run_list" : [
+        "lw1_gitbucket::nginx_mainline",
         "lw1_gitbucket::user_group"
       ]
     },
@@ -51,7 +52,8 @@
       "run_list" : [
         "lw1_gitbucket::settings",
         "lw1_gitbucket::nginx_proxy",
-        "lw1_gitbucket::set_initiaize"
+        "lw1_gitbucket::set_initiaize",
+        "lw1_gitbucket::install_checker"
       ]
     },
     {
